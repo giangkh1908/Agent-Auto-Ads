@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  redis:
+    image: redis:alpine
+    container_name: redis-service
+    ports:
+      - "6379:6379"
+
+  auth-service:   
+    build: ./services/auth-service
+    container_name: auth-service
+    environment:
+      - MONGO_URI=
+      - REDIS_HOST=redis-service
+      - REDIS_PORT=6379
+      - JWT_ACCESS_SECRET=${JWT_ACCESS_SECRET}
+      - JWT_REFRESH_SECRET=${JWT_REFRESH_SECRET}  
+    depends_on:
+      - redis

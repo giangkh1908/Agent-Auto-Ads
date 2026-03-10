@@ -180,7 +180,7 @@ export const refresh = async (req, res) => {
     // Tạo cặp token mới (Xoay vòng)
     const tokens = generateTokens(user);
 
-    // Thay thế token cũ bằng token mới trong Database
+    // Thay thế token cũ bằng token mới trong Database  
     user.refreshTokens = user.refreshTokens.filter(
       (t) => t.token !== refreshToken,
     );
